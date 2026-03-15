@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>AI Application Tracker</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <h1>🤖 AI Application Tracking System</h1>
+    <div id="stats-bar">
+      <span id="stat-total">Total: 0</span>
+      <span id="stat-applied">Applied: 0</span>
+      <span id="stat-interview">Interview: 0</span>
+      <span id="stat-offer">Offer: 0</span>
+      <span id="stat-rejected">Rejected: 0</span>
+    </div>
+  </header>
+
+  <main>
+    <!-- Add Application Form -->
+    <section class="card" id="add-section">
+      <h2>➕ Add Application</h2>
+      <form id="add-form">
+        <div class="form-row">
+          <input type="text" id="company" placeholder="Company *" required />
+          <input type="text" id="role" placeholder="Role / Position *" required />
+          <select id="status">
+            <option value="Applied">Applied</option>
+            <option value="Interview">Interview</option>
+            <option value="Offer">Offer</option>
+            <option value="Rejected">Rejected</option>
+          </select>
+        </div>
+        <textarea id="job_description" placeholder="Job Description (for AI analysis)..." rows="4"></textarea>
+        <textarea id="resume_text" placeholder="Paste your Resume text here (for AI analysis)..." rows="4"></textarea>
+        <textarea id="notes" placeholder="Notes..." rows="2"></textarea>
+        <button type="submit" class="btn btn-primary">Add Application</button>
+      </form>
+    </section>
+
+    <!-- AI Quick Analyze -->
+    <section class="card" id="ai-section">
+      <h2>🧠 AI Quick Analyze</h2>
+      <p class="hint">Analyze resume vs job description without saving.</p>
+      <textarea id="qa-resume" placeholder="Paste resume..." rows="4"></textarea>
+      <textarea id="qa-jd" placeholder="Paste job description..." rows="4"></textarea>
+      <button class="btn btn-ai" onclick="quickAnalyze()">Analyze with AI</button>
+      <div id="ai-result" class="ai-result hidden"></div>
+    </section>
+
+    <!-- Applications List -->
+    <section class="card">
+      <h2>📋 Applications</h2>
+      <div class="filter-bar">
+        <button class="filter-btn active" onclick="filterApps('All', this)">All</button>
+        <button class="filter-btn" onclick="filterApps('Applied', this)">Applied</button>
+        <button class="filter-btn" onclick="filterApps('Interview', this)">Interview</button>
+        <button class="filter-btn" onclick="filterApps('Offer', this)">Offer</button>
+        <button class="filter-btn" onclick="filterApps('Rejected', this)">Rejected</button>
+      </div>
+      <div id="app-list"></div>
+    </section>
+  </main>
+
+  <!-- Edit Modal -->
+  <div id="modal" class="modal hidden">
+    <div class="modal-content">
+      <h2>✏️ Edit Application</h2>
+      <input type="hidden" id="edit-id" />
+      <div class="form-row">
+        <input type="text" id="edit-company" placeholder="Company" />
+        <input type="text" id="edit-role" placeholder="Role" />
+        <select id="edit-status">
+          <option value="Applied">Applied</option>
+          <option value="Interview">Interview</option>
+          <option value="Offer">Offer</option>
+          <option value="Rejected">Rejected</option>
+        </select>
+      </div>
+      <textarea id="edit-jd" placeholder="Job Description..." rows="3"></textarea>
+      <textarea id="edit-resume" placeholder="Resume text..." rows="3"></textarea>
+      <textarea id="edit-notes" placeholder="Notes..." rows="2"></textarea>
+      <div class="modal-actions">
+        <button class="btn btn-primary" onclick="saveEdit()">Save</button>
+        <button class="btn btn-secondary" onclick="closeModal()">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
